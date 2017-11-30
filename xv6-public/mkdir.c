@@ -53,7 +53,7 @@ main(int argc, char *argv[])
       memset(tem,0,sizeof tem);
       strcat(tem,argv[i]);
       strcat(tem,"/");
-      write(foutput,argv[i],strlen(argv[i]));
+      write(foutput,tem,strlen(tem));
       close(foutput);
     }
     else{
