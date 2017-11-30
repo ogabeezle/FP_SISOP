@@ -63,7 +63,7 @@ ls(char *path)
         printf(1, "ls: cannot stat %s\n", buf);
         continue;
       }
-      if(strcmp(fmtname(buf),"yuhuu")==32) continue;
+      if(strcmp(fmtname(buf),".yuhuu")==0||strcmp(fmtname(buf),".yuhuu")==32) continue;
       printf(1, "%s %d %d %d\n", fmtname(buf), st.type, st.ino, st.size);
     }
     break;

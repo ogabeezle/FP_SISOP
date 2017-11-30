@@ -35,15 +35,15 @@ main(int argc, char *argv[])
     char *tem=malloc(100);
     memset(tem,0,sizeof tem);
     strcat(tem,argv[i]);
-    strcat(tem,"/yuhuu");
+    strcat(tem,"/.yuhuu");
     int foutput=open(tem, O_CREATE | O_RDWR);
     int finput,fd;
-    if((finput = open("yuhuu", O_RDWR)) < 0){
+    if((finput = open(".yuhuu", O_RDWR)) < 0){
       printf(1, "cp: cannot open %s\n", argv[2]);
       exit();
     }
     strcat(tem,argv[i]);
-    strcat(tem,"/yuhuu");
+    strcat(tem,"/.yuhuu");
     if((fd = open(tem, 0)) < 0){
       int n;
       char buf[512];

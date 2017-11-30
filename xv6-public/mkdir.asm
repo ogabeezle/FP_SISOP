@@ -157,7 +157,7 @@ char* strcat(char* s1, const char* s2)
     char *tem=malloc(100);
     memset(tem,0,sizeof tem);
     strcat(tem,argv[i]);
-    strcat(tem,"/yuhuu");
+    strcat(tem,"/.yuhuu");
     int foutput=open(tem, O_CREATE | O_RDWR);
   f8:	83 ec 08             	sub    $0x8,%esp
 {
@@ -171,23 +171,23 @@ char* strcat(char* s1, const char* s2)
     char *tem=malloc(100);
     memset(tem,0,sizeof tem);
     strcat(tem,argv[i]);
-    strcat(tem,"/yuhuu");
+    strcat(tem,"/.yuhuu");
     int foutput=open(tem, O_CREATE | O_RDWR);
   fe:	68 02 02 00 00       	push   $0x202
  103:	53                   	push   %ebx
  104:	e8 f9 04 00 00       	call   602 <open>
     int finput,fd;
-    if((finput = open("yuhuu", O_RDWR)) < 0){
+    if((finput = open(".yuhuu", O_RDWR)) < 0){
  109:	59                   	pop    %ecx
     }
     char *tem=malloc(100);
     memset(tem,0,sizeof tem);
     strcat(tem,argv[i]);
-    strcat(tem,"/yuhuu");
+    strcat(tem,"/.yuhuu");
     int foutput=open(tem, O_CREATE | O_RDWR);
  10a:	89 c6                	mov    %eax,%esi
     int finput,fd;
-    if((finput = open("yuhuu", O_RDWR)) < 0){
+    if((finput = open(".yuhuu", O_RDWR)) < 0){
  10c:	58                   	pop    %eax
  10d:	6a 02                	push   $0x2
  10f:	68 31 0a 00 00       	push   $0xa31
@@ -204,7 +204,7 @@ char* strcat(char* s1, const char* s2)
   while (*s1) ++s1;
  12a:	80 3b 00             	cmpb   $0x0,(%ebx)
     int finput,fd;
-    if((finput = open("yuhuu", O_RDWR)) < 0){
+    if((finput = open(".yuhuu", O_RDWR)) < 0){
       printf(1, "cp: cannot open %s\n", argv[2]);
       exit();
     }
@@ -263,7 +263,7 @@ char* strcat(char* s1, const char* s2)
       exit();
     }
     strcat(tem,argv[i]);
-    strcat(tem,"/yuhuu");
+    strcat(tem,"/.yuhuu");
     if((fd = open(tem, 0)) < 0){
  198:	83 ec 08             	sub    $0x8,%esp
 {
@@ -277,7 +277,7 @@ char* strcat(char* s1, const char* s2)
       exit();
     }
     strcat(tem,argv[i]);
-    strcat(tem,"/yuhuu");
+    strcat(tem,"/.yuhuu");
     if((fd = open(tem, 0)) < 0){
  19e:	6a 00                	push   $0x0
  1a0:	53                   	push   %ebx
@@ -295,7 +295,7 @@ char* strcat(char* s1, const char* s2)
  1b3:	8b 85 cc fd ff ff    	mov    -0x234(%ebp),%eax
  1b9:	83 ec 04             	sub    $0x4,%esp
  1bc:	ff 70 08             	pushl  0x8(%eax)
- 1bf:	68 7e 0a 00 00       	push   $0xa7e
+ 1bf:	68 7f 0a 00 00       	push   $0xa7f
  1c4:	6a 01                	push   $0x1
  1c6:	e8 45 05 00 00       	call   710 <printf>
  1cb:	83 c4 10             	add    $0x10,%esp
@@ -334,7 +334,7 @@ char* strcat(char* s1, const char* s2)
  224:	eb 18                	jmp    23e <main+0x23e>
  226:	8d 76 00             	lea    0x0(%esi),%esi
  229:	8d bc 27 00 00 00 00 	lea    0x0(%edi,%eiz,1),%edi
-    strcat(tem,"/yuhuu");
+    strcat(tem,"/.yuhuu");
     if((fd = open(tem, 0)) < 0){
       int n;
       char buf[512];
@@ -347,7 +347,7 @@ char* strcat(char* s1, const char* s2)
  236:	e8 a7 03 00 00       	call   5e2 <write>
  23b:	83 c4 10             	add    $0x10,%esp
     strcat(tem,argv[i]);
-    strcat(tem,"/yuhuu");
+    strcat(tem,"/.yuhuu");
     if((fd = open(tem, 0)) < 0){
       int n;
       char buf[512];
@@ -466,22 +466,22 @@ char* strcat(char* s1, const char* s2)
  2e3:	50                   	push   %eax
  2e4:	8b 85 e4 fd ff ff    	mov    -0x21c(%ebp),%eax
  2ea:	ff 30                	pushl  (%eax)
- 2ec:	68 4e 0a 00 00       	push   $0xa4e
+ 2ec:	68 4f 0a 00 00       	push   $0xa4f
  2f1:	6a 02                	push   $0x2
  2f3:	e8 18 04 00 00       	call   710 <printf>
       break;
  2f8:	83 c4 10             	add    $0x10,%esp
  2fb:	e9 0d ff ff ff       	jmp    20d <main+0x20d>
     strcat(tem,argv[i]);
-    strcat(tem,"/yuhuu");
+    strcat(tem,"/.yuhuu");
     int foutput=open(tem, O_CREATE | O_RDWR);
     int finput,fd;
-    if((finput = open("yuhuu", O_RDWR)) < 0){
+    if((finput = open(".yuhuu", O_RDWR)) < 0){
       printf(1, "cp: cannot open %s\n", argv[2]);
  300:	8b 85 cc fd ff ff    	mov    -0x234(%ebp),%eax
  306:	52                   	push   %edx
  307:	ff 70 08             	pushl  0x8(%eax)
- 30a:	68 6a 0a 00 00       	push   $0xa6a
+ 30a:	68 6b 0a 00 00       	push   $0xa6b
  30f:	6a 01                	push   $0x1
  311:	e8 fa 03 00 00       	call   710 <printf>
       exit();
@@ -494,7 +494,7 @@ main(int argc, char *argv[])
     printf(2, "Usage: mkdir files...\n");
  31b:	50                   	push   %eax
  31c:	50                   	push   %eax
- 31d:	68 37 0a 00 00       	push   $0xa37
+ 31d:	68 38 0a 00 00       	push   $0xa38
  322:	6a 02                	push   $0x2
  324:	e8 e7 03 00 00       	call   710 <printf>
     exit();
@@ -1557,7 +1557,7 @@ putc(int fd, char c)
  828:	89 45 d0             	mov    %eax,-0x30(%ebp)
         if(s == 0)
           s = "(null)";
- 82b:	b8 9a 0a 00 00       	mov    $0xa9a,%eax
+ 82b:	b8 9b 0a 00 00       	mov    $0xa9b,%eax
  830:	85 db                	test   %ebx,%ebx
  832:	0f 44 d8             	cmove  %eax,%ebx
         while(*s != 0){

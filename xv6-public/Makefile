@@ -180,8 +180,8 @@ UPROGS=\
 	_wc\
 	_zombie\
 
-fs.img: mkfs README yuhuu $(UPROGS)
-	./mkfs fs.img README yuhuu $(UPROGS)
+fs.img: mkfs README .yuhuu $(UPROGS)
+	./mkfs fs.img README .yuhuu $(UPROGS)
 
 -include *.d
 
@@ -247,7 +247,7 @@ qemu-nox-gdb: fs.img xv6.img .gdbinit
 
 EXTRA=\
 	clear.c\
-	yuhuu\
+	.yuhuu\
 	pwd.c\
 	cp.c\
 	touch.c\

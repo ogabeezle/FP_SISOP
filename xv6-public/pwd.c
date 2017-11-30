@@ -6,7 +6,7 @@ void
 cat()
 {
   int n;
-  int fd = open("yuhuu", 0);
+  int fd = open(".yuhuu", 0);
     int buf[512];
   while((n = read(fd, buf, sizeof(buf))) > 0) {
     if (write(1, buf, n) != n) {
