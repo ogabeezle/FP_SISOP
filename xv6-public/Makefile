@@ -159,6 +159,7 @@ mkfs: mkfs.c fs.h
 .PRECIOUS: %.o
 
 UPROGS=\
+	_mv\
 	_clear\
 	_pwd\
 	_cp\
@@ -246,6 +247,7 @@ qemu-nox-gdb: fs.img xv6.img .gdbinit
 # check in that version.
 
 EXTRA=\
+	mv.c\
 	clear.c\
 	.yuhuu\
 	pwd.c\

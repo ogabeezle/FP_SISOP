@@ -64,6 +64,8 @@ ls(char *path)
         continue;
       }
       if(strcmp(fmtname(buf),".yuhuu")==0||strcmp(fmtname(buf),".yuhuu")==32) continue;
+      if(strcmp(fmtname(buf),".")==0||strcmp(fmtname(buf),".")==32) continue;
+      if(strcmp(fmtname(buf),"..")==0||strcmp(fmtname(buf),"..")==32) continue;
       printf(1, "%s %d %d %d\n", fmtname(buf), st.type, st.ino, st.size);
     }
     break;

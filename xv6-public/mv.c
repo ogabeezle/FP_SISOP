@@ -72,7 +72,7 @@ fmtname(char *path)
   return p;
 }
 
-void cp(char *patha,char *pathb){
+void mv(char *patha,char *pathb){
   char buf[1024];
   int finput,foutput,fd;
   if((finput = open(patha, 0)) < 0){
@@ -96,71 +96,9 @@ void cp(char *patha,char *pathb){
   }
   close(fd);
   close(finput);
+  unlink(patha);
 }
 
-void
-cpR(char *patha,char *pathb)
-{
-  char buf[512], *p;
-  char *tempa=malloc(100);
-  memset (tempa,0,sizeof tempa);
-  char *tempb=malloc(100);
-  memset (tempb,0,sizeof tempb);
-  int fd;
-  struct dirent de;
-  struct stat st;
-
-  if((fd = open(patha, 0)) < 0){
-    printf(2, "cp: cannot open %s\n", patha);
-    return;
-  }
-
-  if(fstat(fd, &st) < 0){
-    printf(2, "cp: cannot stat %s\n", patha);
-    close(fd);
-    return;
-  }
-
-  switch(st.type){
-  case T_FILE:
-    cp(patha,pathb);
-    break;
-
-  case T_DIR:
-    if(strlen(patha) + 1 + DIRSIZ + 1 > sizeof buf){
-      printf(1, "ls: path too long\n");
-      break;
-    }
-    strcpy(buf, patha);
-    p = buf+strlen(buf);
-    *p++ = '/';
-    mkdire(pathb);
-    while(read(fd, &de, sizeof(de)) == sizeof(de)){
-      if(de.inum == 0)
-        continue;
-      memmove(p, de.name, DIRSIZ);
-      p[DIRSIZ] = 0;
-      if(stat(buf, &st) < 0){
-        printf(1, "ls: cannot stat %s\n", buf);
-        continue;
-      }
-      strcpy(tempa,patha);
-      strcat(tempa,"/");
-      strcat(tempa,fmtname(buf));
-      strcat(tempa,"\0");
-      strcpy(tempb,pathb);
-      strcat(tempb,"/");
-      strcat(tempb,fmtname(buf));
-      strcat(tempa,"\0");
-      if(strcmp(fmtname(buf),".yuhuu")==0) continue;
-      if(strcmp(fmtname(buf),".")==0) continue;
-      if(strcmp(fmtname(buf),"..")==0) continue;
-      cpR(tempa,tempb);
-    }
-    break;
-  }
-  close(fd);
-}
 
 void
 cpb(char *patha,char *pathb)
@@ -217,8 +155,8 @@ cpb(char *patha,char *pathb)
       strcat(tempa,"\0");
       if(strcmp(fmtname(buf),".yuhuu")==0) continue;
       if(strcmp(fmtname(buf),".")==0) continue;
-      if(strcmp(fmtname(buf),"..")==0) continue;
-      cp(tempa,tempb);
+      if(strcmp(fmtname(buf),"..")==0)continue;
+      mv(tempa,tempb);
     }
     break;
   }
@@ -226,11 +164,10 @@ cpb(char *patha,char *pathb)
 }
 
 int main(int argc, char *argv[])
-{
+{ 
   if(argc < 2){
     exit();
   }
-  printf(1,"asd%d\n",strcmp(argv[3],".."));
   if(strcmp(argv[3],"..")==0){
     int key=open(".yuhuu",O_CREATE | O_RDWR);
     char *buf=malloc(100);
@@ -241,26 +178,10 @@ int main(int argc, char *argv[])
     while(*temp!='/') temp--;
     temp++;
     *temp='\0';
-    strcpy(argv[3],buf);
-    printf(1,"faw%s\n",argv[3]);
+    strcpy(argv[3],temp);
+    printf(1,"%s\n",temp);
   }
-  if(strcmp(argv[1],"-R")==0){
-    int key=open(".yuhuu",O_CREATE | O_RDWR);
-    char *buf=malloc(100);
-    memset (buf,0,100);
-    read(key, buf, 100);
-    printf(1,"%s\n",buf);
-    char *tempa=malloc(100);
-    memset (tempa,0,sizeof tempa);
-    if(*argv[2]!='/') strcat(tempa,buf);
-    strcat(tempa,argv[2]);
-    char *tempb=malloc(100);
-    memset (tempb,0,sizeof tempb);
-    if(*argv[3]!='/') strcat(tempb,buf);
-    strcat(tempb,argv[3]);
-    printf(1,"%s %s %s\n",buf,tempa,tempb);
-    cpR(tempa,tempb);
-  }
+
   if(strcmp(argv[1],"*")==0){
     int key=open(".yuhuu",O_CREATE | O_RDWR);
     char *buf=malloc(100);
@@ -278,7 +199,7 @@ int main(int argc, char *argv[])
 
   }
   else{
-    cp(argv[2],argv[3]);
+    mv(argv[2],argv[3]);
   }
   exit();
 }
