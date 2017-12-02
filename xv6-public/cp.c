@@ -230,7 +230,7 @@ int main(int argc, char *argv[])
   if(argc < 2){
     exit();
   }
-  printf(1,"asd%d\n",strcmp(argv[3],".."));
+  
   if(strcmp(argv[3],"..")==0){
     int key=open(".yuhuu",O_CREATE | O_RDWR);
     char *buf=malloc(100);
