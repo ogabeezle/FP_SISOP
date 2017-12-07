@@ -37,6 +37,11 @@ main(int argc, char *argv[])
     strcat(tem,argv[i]);
     strcat(tem,"/.yuhuu");
     int foutput=open(tem, O_CREATE | O_RDWR);
+    if(*argv[i]=='/'){
+      write(foutput,argv[i],strlen(argv[i]));
+      close(foutput);
+      continue;
+    }
     int finput,fd;
     if((finput = open(".yuhuu", O_RDWR)) < 0){
       printf(1, "cp: cannot open %s\n", argv[2]);

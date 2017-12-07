@@ -27,6 +27,11 @@ void mkdire(char *path){
   strcat(tem,path);
   strcat(tem,"/.yuhuu");
   int foutput=open(tem, O_CREATE | O_RDWR);
+  if(*path=='/'){
+    write(foutput,path,strlen(path));
+    close(foutput);
+    return;
+  }
   int finput,fd;
   if((finput = open(".yuhuu", O_RDWR)) < 0){
     printf(1, "cp: cannot open %s\n", path);
