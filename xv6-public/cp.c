@@ -16,10 +16,27 @@ char* strcat(char* s1, const char* s2)
 
   return b;
 }
+char*
+fmtname(char *path)
+{
+  static char buf[DIRSIZ+1];
+  char *p;
+
+  // Find first character after last slash.
+  for(p=path+strlen(path); p >= path && *p != '/'; p--)
+    ;
+  p++;
+
+  // Return blank-padded name.
+  if(strlen(p) >= DIRSIZ)
+    return p;
+  memmove(buf, p, strlen(p));
+  strcat(buf,"\0");
+  return p;
+}
 
 void mkdire(char *path){
   if(mkdir(path) < 0){
-    printf(2, "mkdir: %s failed to create\n", path);
     return;
   }
   char *tem=malloc(100);
@@ -41,7 +58,7 @@ void mkdire(char *path){
       write(foutput,buf,n);
     }
     memset(tem,0,sizeof tem);
-    strcat(tem,path);
+    strcat(tem,fmtname(path));
     strcat(tem,"/");
     write(foutput,tem,strlen(tem));
     close(foutput);
@@ -53,30 +70,12 @@ void mkdire(char *path){
   close(finput);
 }
 
-char*
-fmtname(char *path)
-{
-  static char buf[DIRSIZ+1];
-  char *p;
-
-  // Find first character after last slash.
-  for(p=path+strlen(path); p >= path && *p != '/'; p--)
-    ;
-  p++;
-
-  // Return blank-padded name.
-  if(strlen(p) >= DIRSIZ)
-    return p;
-  memmove(buf, p, strlen(p));
-  strcat(buf,"\0");
-  return p;
-}
 
 void cp(char *patha,char *pathb){
   char buf[1024];
   int finput,foutput,fd;
   if((finput = open(patha, 0)) < 0){
-    printf(1, "cp: caaernnot open %s\n", patha);
+    printf(1, "cp: cannot open %s\n", patha);
     exit();
   }
   struct stat st;
@@ -151,7 +150,7 @@ cpR(char *patha,char *pathb)
       strcpy(tempb,pathb);
       strcat(tempb,"/");
       strcat(tempb,fmtname(buf));
-      strcat(tempa,"\0");
+      strcat(tempb,"\0");
       if(strcmp(fmtname(buf),".yuhuu")==0) continue;
       if(strcmp(fmtname(buf),".")==0) continue;
       if(strcmp(fmtname(buf),"..")==0) continue;
@@ -242,14 +241,12 @@ int main(int argc, char *argv[])
     temp++;
     *temp='\0';
     strcpy(argv[3],buf);
-    printf(1,"faw%s\n",argv[3]);
   }
   if(strcmp(argv[1],"-R")==0){
     int key=open(".yuhuu",O_CREATE | O_RDWR);
     char *buf=malloc(100);
     memset (buf,0,100);
     read(key, buf, 100);
-    printf(1,"%s\n",buf);
     char *tempa=malloc(100);
     memset (tempa,0,sizeof tempa);
     if(*argv[2]!='/') strcat(tempa,buf);
@@ -258,7 +255,6 @@ int main(int argc, char *argv[])
     memset (tempb,0,sizeof tempb);
     if(*argv[3]!='/') strcat(tempb,buf);
     strcat(tempb,argv[3]);
-    printf(1,"%s %s %s\n",buf,tempa,tempb);
     cpR(tempa,tempb);
   }
   if(strcmp(argv[1],"*")==0){

@@ -20,6 +20,7 @@ main(int argc, char *argv[])
    e:	83 ec 04             	sub    $0x4,%esp
     cat();
   11:	e8 0a 00 00 00       	call   20 <cat>
+    
     exit();
   16:	e8 f7 02 00 00       	call   312 <exit>
   1b:	66 90                	xchg   %ax,%ax
