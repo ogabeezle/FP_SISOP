@@ -279,7 +279,7 @@ int main(int argc, char *argv[])
 
   }
   else{
-    cp(argv[2],argv[3]);
+    cp(argv[1],argv[2]);
   }
   exit();
 }
